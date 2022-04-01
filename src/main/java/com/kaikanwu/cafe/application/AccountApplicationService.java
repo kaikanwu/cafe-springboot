@@ -2,6 +2,7 @@ package com.kaikanwu.cafe.application;
 
 import com.kaikanwu.cafe.domain.account.Account;
 import com.kaikanwu.cafe.domain.account.AccountRepository;
+import com.kaikanwu.cafe.domain.account.validation.NotConflictAccount;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,9 +37,6 @@ public class AccountApplicationService {
      * 更新账号
      */
     public void updateAccount(Account account) {
-//        if (account.getId() == null) {
-//            throw new MissingServletRequestParameterException(account.getId().toString(), "Integer");
-//        }
         repository.save(account);
     }
 

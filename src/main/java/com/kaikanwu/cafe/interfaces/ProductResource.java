@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("/products")
@@ -17,24 +16,23 @@ public class ProductResource {
 
 
     // 商品相关接口
-
-    @GetMapping
-    public Iterable<Product> getAllProducts() {
-        return service.getAllProducts();
+    @PostMapping
+    public Response createProduct(@Valid Product product) {
+        return Response.success(service.saveProduct(product));
     }
 
     @GetMapping("/{id}")
-    public Product getProductById(@PathVariable Integer id) {
-        return service.getProductById(id);
+    public Response getProductById(@PathVariable Integer id) {
+        return Response.success(service.getProductById(id));
+    }
+
+    @GetMapping
+    public Response getAllProducts() {
+        return Response.success(service.getAllProducts());
     }
 
     @PutMapping
     public Response updateProduct(@Valid Product product) {
-        return Response.success(service.saveProduct(product));
-    }
-
-    @PostMapping
-    public Response createProduct(@Valid Product product) {
         return Response.success(service.saveProduct(product));
     }
 
@@ -44,14 +42,14 @@ public class ProductResource {
         return Response.success();
     }
 
+    @GetMapping("/stock/{productId}")
+    public Response getStock(@PathVariable Integer productId) {
+        return Response.success(service.getStock(productId));
+    }
+
     @PostMapping("/stock/{productId}")
     public Response updateStock(@PathVariable Integer productId, Integer amount) {
         service.setStockAmount(productId, amount);
         return Response.success();
-    }
-
-    @GetMapping("/stock/{productId}")
-    public Response getStock(@PathVariable Integer productId) {
-        return Response.success(service.getStock(productId));
     }
 }

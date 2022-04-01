@@ -28,7 +28,7 @@ public class CacheConfiguration {
 
     @Bean(name = "settlementCache")
     public Cache getSettlementTTLCache() {
-        return new CaffeineCache("settlement", Caffeine.newBuilder().expireAfterAccess(DEFAULT_CACHE_EXPIRES, TimeUnit.MILLISECONDS).build());
+        return new CaffeineCache("settlement", Caffeine.newBuilder().expireAfterAccess(10 * DEFAULT_CACHE_EXPIRES, TimeUnit.MILLISECONDS).build());
     }
 
 

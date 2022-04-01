@@ -1,11 +1,14 @@
 package com.kaikanwu.cafe.domain.payment;
 
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.stats.CacheStats;
 import com.kaikanwu.cafe.application.dto.Settlement;
 import com.kaikanwu.cafe.domain.warehouse.StockService;
 import com.kaikanwu.cafe.infrastructure.cache.CacheConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.Cache;
+import org.springframework.cache.caffeine.CaffeineCache;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -50,7 +53,10 @@ public class PaymentService {
         // cache
         settlementCache.put(payment.getPayId(), settlement);
 
-        log.info("创建支付订单，总额: {}", payment.getTotalPrice());
+        log.info("支付订单已创建，总额: {}，订单号：{}", payment.getTotalPrice(), payment.getPayId());
+        //todo 尝试打印缓存
+//        CacheStats cacheStats = (CaffeineCache)settlementCache.getNativeCache()
+//        log.info("当前结算单缓存：{}", cache.as);
         return payment;
     }
 
@@ -66,7 +72,7 @@ public class PaymentService {
                 paymentRepository.save(payment);
                 //
                 accomplishSettlement(Payment.Status.PAYED, payment.getPayId());
-                log.info("编号为{} 的支付单已经处理完成，等待支付", payId);
+                log.info("编号为 {} 的支付单已经完成支付，支付金额为 {}", payId, payment.getTotalPrice());
                 return payment.getTotalPrice();
             } else {
                 throw new UnsupportedOperationException("当前订单不允许支付，当前状态为：" + payment.getPayStatus());
@@ -102,11 +108,10 @@ public class PaymentService {
                 synchronized (payment.getPayId().intern()) {
                     Payment currentPayment = paymentRepository.findById(payment.getId()).orElseThrow(() -> new EntityNotFoundException(payment.getPayId().toString()));
                     if (currentPayment.getPayStatus() == Payment.Status.WAITING) {
-                        log.info("");
                         accomplishSettlement(Payment.Status.TIMEOUT, payment.getPayId());
+                        log.info("超时支付订单已解冻，订单金额：{}，订单号：{}", payment.getTotalPrice(), payment.getPayId());
                     }
                 }
-
             }
         }, payment.getExpires());
     }

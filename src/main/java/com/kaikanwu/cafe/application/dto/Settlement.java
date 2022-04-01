@@ -5,6 +5,7 @@ import com.kaikanwu.cafe.domain.warehouse.Product;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Map;
 
@@ -12,15 +13,25 @@ import java.util.Map;
  * 结算
  */
 public class Settlement {
+    /**
+     * 结算单中的商品
+     */
+    @Size(min = 1, message = "至少要有一样商品")
+    private Collection<Item> items;
 
-    public static class Item{
+    /**
+     * 产品 id 和产品的映射
+     */
+    public transient Map<Integer, Product> productMap;
+
+    public static class Item {
         // 商品数量
         @NotNull
-        @Min(value =1, message = "结算单中商品数量至少是 1 件")
+        @Min(value = 1, message = "结算单中商品数量至少是 1 件")
         private Integer amount;
 
         @JsonProperty("id")
-        @NotNull(message = "商品信息不能为空")
+        @NotNull(message = "商品 id 不能为空")
         private Integer productId;
 
         public Integer getAmount() {
@@ -40,13 +51,6 @@ public class Settlement {
         }
     }
 
-    /**
-     * 结算单中的商品
-     */
-    private Collection<Item> items;
-
-
-    public transient Map<Integer, Product> productMap;
 
     public Collection<Item> getItems() {
         return items;
@@ -55,7 +59,6 @@ public class Settlement {
     public void setItems(Collection<Item> items) {
         this.items = items;
     }
-
 
 
 }

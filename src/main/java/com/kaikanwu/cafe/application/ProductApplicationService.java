@@ -46,7 +46,9 @@ public class ProductApplicationService {
      * 根据产品获取对应库存
      */
     public Stock getStock(Integer productId) {
-        return stockService.getByProductId(productId);
+        Stock stock = stockService.getByProductId(productId);
+        stock.setProduct(productService.getProductById(productId));
+        return stock;
     }
 
     /**

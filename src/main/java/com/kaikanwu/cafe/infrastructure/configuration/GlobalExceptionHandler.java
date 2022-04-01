@@ -1,47 +1,27 @@
 package com.kaikanwu.cafe.infrastructure.configuration;
 
 import com.kaikanwu.cafe.infrastructure.response.Response;
-import com.kaikanwu.cafe.infrastructure.response.ResponseCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.validation.BindException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.validation.UnexpectedTypeException;
-
-import java.util.ArrayList;
-import java.util.List;
+import javax.validation.ConstraintViolationException;
 import java.util.stream.Collectors;
 
-import static com.kaikanwu.cafe.infrastructure.response.ResponseCode.*;
+import static com.kaikanwu.cafe.infrastructure.response.ResponseCode.INTERNAL_SERVER_ERROR;
 
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
 
     @ExceptionHandler
-    public Response handlerError(MissingServletRequestParameterException e) {
-        log.error("Missing request param", e);
-        String message = String.format("Missing request param: %s", e.getParameterName());
+    public Response handlerError(ConstraintViolationException e) {
+        log.error("参数校验失败", e);
+        String message = String.format("参数校验失败：%s", e.getMessage());
         return Response.error(Response.FAILURE_CODE, message);
     }
-//
-//     @ExceptionHandler
-//    public Response handlerError(MethodArgumentNotValidException e) {
-//        log.error("Param not valid", e);
-//        String message = String.format("Param not valid: %s", e.getParameter());
-//        return Response.error(Response.FAILURE_CODE, message);
-//    }
-//
-//    @ExceptionHandler
-//    public Response handlerError(UnexpectedTypeException e) {
-//        log.error("Param not valid", e);
-//        String message = String.format("Param not valid: %s", e.getMessage());
-//        return Response.error(Response.FAILURE_CODE, message);
-//    }
 
     @ExceptionHandler
     public Response handlerError(BindException e) {

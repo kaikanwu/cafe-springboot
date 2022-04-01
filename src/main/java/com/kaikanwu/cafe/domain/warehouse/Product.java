@@ -9,7 +9,6 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -20,11 +19,11 @@ public class Product extends BaseEntity {
     private String title;
 
     @NotNull
-    @Min(value = 0,message = "商品价格不能低于 0 ")
+    @Min(value = 0, message = "商品价格不能低于 0 ")
     private Double price;
 
-    @Max(value = 10, message = "评分最高 10")
-    @Min(value = 0, message = "评分最低 0")
+    @Max(value = 10, message = "商品评分最高 10")
+    @Min(value = 0, message = "商品评分最低 0")
     private Float rate;
 
     @NotEmpty

@@ -2,7 +2,9 @@ package com.kaikanwu.cafe.interfaces;
 
 import com.kaikanwu.cafe.application.AccountApplicationService;
 import com.kaikanwu.cafe.domain.account.Account;
+import com.kaikanwu.cafe.domain.account.validation.NotConflictAccount;
 import com.kaikanwu.cafe.infrastructure.response.Response;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -10,6 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/account")
+@Validated
 public class AccountResource {
 
     @Resource
@@ -28,7 +31,9 @@ public class AccountResource {
     }
 
     @PutMapping
-    public Response updateUser(@Valid Account account) {
+    public Response updateUser(@Valid @NotConflictAccount Account account) {
+        //todo: 需要更多的想想业务参数如何校验？也就是放在 service 中，还是放在方法参数注解里处理
+        // 如果放注解里，逻辑复杂时，可能会没法复用。
         accountService.updateAccount(account);
         return Response.success();
     }

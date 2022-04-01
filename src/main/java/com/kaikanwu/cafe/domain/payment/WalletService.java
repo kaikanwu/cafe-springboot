@@ -26,7 +26,10 @@ public class WalletService {
         if (wallet.getMoney() > amount) {
             wallet.setMoney(wallet.getMoney() - amount);
             walletRepository.save(wallet);
-            log.info("用户{} 支付成功，本次消费 {}，余额 {}", accountId, amount, wallet.getMoney());
+            log.info("用户 {} 支付成功，本次消费 {}，余额 {}", accountId, amount, wallet.getMoney());
+        } else {
+            log.info("用户 {} 支付失败，余额不足，当前余额 {}，当前订单额 {}", accountId, wallet.getMoney(), amount);
+
         }
     }
 

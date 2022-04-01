@@ -1,7 +1,6 @@
 package com.kaikanwu.cafe.domain.warehouse;
 
 import com.kaikanwu.cafe.domain.BaseEntity;
-import com.kaikanwu.cafe.domain.warehouse.Product;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -21,7 +20,7 @@ public class Stock extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
-    private Product product;
+    private  Product product;
 
 
     /**

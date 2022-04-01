@@ -31,6 +31,8 @@ public class PaymentApplicationService {
      * 执行结算清单，生成支付单
      */
     public Payment executeBySettlement(Settlement settlement) {
+        // 根据提交的商品信息获取服务器端存储端商品信息，用于支付计算
+        productService.setProductMap(settlement);
         // 生成支付单
         Payment payment = paymentService.producePayment(settlement);
         // 设置定时任务
