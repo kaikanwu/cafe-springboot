@@ -2,7 +2,6 @@ package com.kaikanwu.cafe.interfaces;
 
 import com.kaikanwu.cafe.application.PaymentApplicationService;
 import com.kaikanwu.cafe.application.dto.Settlement;
-import com.kaikanwu.cafe.domain.payment.Payment;
 import com.kaikanwu.cafe.infrastructure.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

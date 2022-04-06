@@ -1,9 +1,12 @@
+database: hsqldb
+
 spring:
   datasource:
-    url: "jdbc:mysql://localhost:3306/cafe?useUnicode=true&characterEncoding=utf-8"
-    username: "kaikanwu"
-    password: "123456"
-    initialization-mode: always
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    schema: "classpath:db/${database}/schema.sql"
+    data: "classpath:db/${database}/data.sql"
+    sql-script-encoding: UTF-8
+
   jpa:
     show-sql: false
     hibernate:

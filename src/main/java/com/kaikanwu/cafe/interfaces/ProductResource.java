@@ -15,7 +15,6 @@ public class ProductResource {
     ProductApplicationService service;
 
 
-    // 商品相关接口
     @PostMapping
     public Response createProduct(@Valid Product product) {
         return Response.success(service.saveProduct(product));
