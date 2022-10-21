@@ -2,6 +2,7 @@
 .idea/
 out/
 target/
+.DS_Store
 
 ### Java ###
 # Compiled class file

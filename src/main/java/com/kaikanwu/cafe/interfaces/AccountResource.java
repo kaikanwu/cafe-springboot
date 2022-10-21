@@ -32,7 +32,7 @@ public class AccountResource {
 
     @PutMapping
     public Response updateUser(@Valid @NotConflictAccount Account account) {
-        //todo: 需要更多的想想业务参数如何校验？也就是放在 service 中，还是放在方法参数注解里处理
+        // todo: 需要更多的想想业务参数如何校验？也就是放在 service 中，还是放在方法参数注解里处理
         // 如果放注解里，逻辑复杂时，可能会没法复用。
         accountService.updateAccount(account);
         return Response.success();
