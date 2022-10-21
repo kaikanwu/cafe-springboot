@@ -1,5 +1,16 @@
 # cafe-springboot
 
+业务调用：
+- Account 账号服务，关联 account 表
+- Payment 支付服务，关联 payment, wallet 表
+- Product 商品服务，关联 product, stock 表
+
+接口信息：
+- Account
+- Payment
+- Product
+- Settlement
+
 组件： 
 - Web 框架：Spring Boot
 - Web 服务器：Tomcat
