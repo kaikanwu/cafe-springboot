@@ -7,9 +7,20 @@
 
 接口信息：
 - Account
+  - Create
+  - Get
+  - Update
 - Payment
 - Product
+  - CreateProduct
+  - UpdateProduct
+  - DeleteProduct
+  - FindAllProducts
+  - FindById
+  - FindStackByProductId
+  - UpdateStock
 - Settlement
+  - settlement
 
 组件： 
 - Web 框架：Spring Boot
