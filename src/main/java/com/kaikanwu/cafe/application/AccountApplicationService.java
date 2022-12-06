@@ -16,7 +16,6 @@ public class AccountApplicationService {
     @Autowired
     private AccountRepository repository;
 
-
     /**
      * 创建账号
      */

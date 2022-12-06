@@ -21,7 +21,7 @@ public class PaymentResource {
      */
     @PostMapping("/{payId}")
     public Response updatePaymentStatus(@PathVariable String payId, Integer accountId, Payment.Status status) {
-        if (status == Payment.Status.PAYED) {
+        if (status == Payment.Status.PAYED) { //todo: check this Enum's usage.
             service.accomplishPayment(accountId, payId);
         } else {
             service.cancelPayment(payId);

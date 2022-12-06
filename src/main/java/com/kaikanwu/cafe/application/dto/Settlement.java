@@ -24,6 +24,10 @@ public class Settlement {
      */
     public transient Map<Integer, Product> productMap;
 
+    /**
+     * 商品类
+     * 两个属性：商品数量、商品 ID
+     */
     public static class Item {
         // 商品数量
         @NotNull
@@ -51,7 +55,6 @@ public class Settlement {
         }
     }
 
-
     public Collection<Item> getItems() {
         return items;
     }
@@ -59,6 +62,5 @@ public class Settlement {
     public void setItems(Collection<Item> items) {
         this.items = items;
     }
-
 
 }

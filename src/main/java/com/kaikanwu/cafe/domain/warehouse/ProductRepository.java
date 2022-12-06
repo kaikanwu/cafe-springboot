@@ -11,5 +11,4 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
      */
     List<Product> findByIdIn(List<Integer> ids);
 
-
 }

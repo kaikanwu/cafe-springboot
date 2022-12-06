@@ -45,7 +45,7 @@ public class Payment extends BaseEntity {
         WAITING,
         CANCEL,
         PAYED,
-        TIMEOUT
+        TIMEOUT,
     }
 
 
