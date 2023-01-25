@@ -20,9 +20,15 @@ public class AccountApplicationService {
      * 创建账号
      */
     public void createAccount(Account account) {
-        log.info("new user created: {}", account);
+        log.info("Account.createAccount, request: {}", account);
+        Account existAccount = repository.findByUsername(account.getUsername());
+        if (existAccount != null) {
+            log.error("Account.createAccount, failed: {}", account);
+            throw new UnsupportedOperationException("用户名已存在，不支持重复创建。");
+        }
         account.setPassword(account.getPassword());
         repository.save(account);
+        log.info("Account.createAccount, success {}", account);
     }
 
     /**

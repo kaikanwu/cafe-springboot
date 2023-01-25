@@ -19,7 +19,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     public Response handlerError(ConstraintViolationException e) {
         log.error("参数校验失败", e);
-        String message = String.format("参数校验失败：%s", e.getMessage());
+        String message = String.format("参数校验失败: %s", e.getMessage());
+        return Response.error(Response.FAILURE_CODE, message);
+    }
+
+    @ExceptionHandler
+    public Response handlerError(UnsupportedOperationException e) {
+        log.error("不支持的操作", e.getMessage());
+        String message = String.format("操作失败：%s", e.getMessage());
         return Response.error(Response.FAILURE_CODE, message);
     }
 

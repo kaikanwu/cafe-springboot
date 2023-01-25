@@ -18,7 +18,6 @@ public class AccountResource {
     @Resource
     private AccountApplicationService accountService;
 
-
     @PostMapping
     public Response createUser(@Valid Account user) {
         accountService.createAccount(user);

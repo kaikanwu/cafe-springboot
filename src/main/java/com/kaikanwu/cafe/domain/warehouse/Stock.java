@@ -15,7 +15,6 @@ import javax.persistence.OneToOne;
 public class Stock extends BaseEntity {
 
     private Integer amount;
-
     private Integer frozen;
 
     @OneToOne(fetch = FetchType.LAZY)

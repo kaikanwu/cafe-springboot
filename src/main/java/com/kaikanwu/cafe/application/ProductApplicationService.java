@@ -41,7 +41,6 @@ public class ProductApplicationService {
         productService.removeProduct(id);
     }
 
-
     /**
      * 根据产品获取对应库存
      */

@@ -19,7 +19,6 @@ public class Response{
     private Object data;
 
     public static Response success() {
-
         return Response.builder()
                 .code(ResponseCode.SUCCESS.code())
                 .message(ResponseCode.SUCCESS.message())

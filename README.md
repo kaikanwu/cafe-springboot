@@ -2,6 +2,17 @@
 主要业务逻辑：
 用户调用 Settlement 服务接口来生成结算单，然后调用 Payment 支付接口来支付订单，或者取消订单。
 
+数据表
+- account   账户表
+- product   产品表
+- wallet    用户钱包
+- stock     商品库存
+- payment   支付
+
+包结构
+- interfaces     对外接口
+- application
+- infrastructure 配置类
 
 业务调用：
 - Account 账号服务，关联 account 表
