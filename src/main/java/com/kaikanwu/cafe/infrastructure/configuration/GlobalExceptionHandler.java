@@ -7,6 +7,7 @@ import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.ConstraintViolationException;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,13 @@ public class GlobalExceptionHandler {
     public Response handlerError(UnsupportedOperationException e) {
         log.error("不支持的操作", e);
         String message = String.format("操作失败：%s", e.getMessage());
+        return Response.error(Response.FAILURE_CODE, message);
+    }
+
+    @ExceptionHandler
+    public Response handlerError(EntityNotFoundException e) {
+        log.error("未查询到信息", e);
+        String message = String.format("操作失败: %s", e.getMessage());
         return Response.error(Response.FAILURE_CODE, message);
     }
 

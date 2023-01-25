@@ -13,7 +13,6 @@ public class StockService {
     @Autowired
     private StockRepository stockRepository;
 
-    // 库存普通操作
 
     /**
      * 根据产品 id 获取对应库存
@@ -23,7 +22,7 @@ public class StockService {
      */
     public Stock getByProductId(Integer productId) {
         return stockRepository.findById(productId)
-                .orElseThrow(() -> new EntityNotFoundException(productId.toString()));
+                .orElseThrow(() -> new EntityNotFoundException("当前产品不存在，产品 id: " + productId));
     }
 
     /**
@@ -77,6 +76,4 @@ public class StockService {
         stockRepository.save(stock);
         log.info("库存减少，商品：{}，数量：{}", productId, number);
     }
-
-
 }
