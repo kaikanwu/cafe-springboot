@@ -21,9 +21,9 @@
 
 接口信息：
 - Account
-  - Create
-  - Get
-  - Update
+  - Create 创建账户
+  - Get    根据用户名获取账户
+  - Update 更新已有账户信息
 - Payment
 - Product
   - CreateProduct

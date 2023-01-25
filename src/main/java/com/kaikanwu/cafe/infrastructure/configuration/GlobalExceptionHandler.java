@@ -25,7 +25,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler
     public Response handlerError(UnsupportedOperationException e) {
-        log.error("不支持的操作", e.getMessage());
+        log.error("不支持的操作", e);
         String message = String.format("操作失败：%s", e.getMessage());
         return Response.error(Response.FAILURE_CODE, message);
     }
